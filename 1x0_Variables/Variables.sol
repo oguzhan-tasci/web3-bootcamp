@@ -14,8 +14,9 @@ contract Variables {
     
     int256 number = 12; // -2^256 to 2^256 - 1 
 
-    uint number2 = 10; // 0 to 2^256 - 1
+    uint number2 = 10; // 0 to 2^256 - 1 --> u anlamı : Negatif sayılar yok
 
+    // adress ile etherum adresi tanımlıyoruz. Bunun boyutuda 20byte
     address addresss; // 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4 - 20 byte
 
     bytes32 data; // bytes1 => bytes32
@@ -29,11 +30,15 @@ contract Variables {
 
     uint[] numbers; // [1, 2, 3, 4, 5]
 
-    mapping(uint => uint) dictionary;
+    // Mapping degisken türü şu şekilde çalışıyor : mapping(uint(1) => string(2)) dictionary(3);
+    // Uint olarak tanıttım değişken(1), string türündeki değişkenleri(2) tutsun ve bunu dictionary(3) diyerek çağıralım.
+    // Key - value mantığına oldukça benzer şekilde çalışıyor..
+    mapping(uint => string) dictionary;
 
 
     // User Defined Value Types
 
+    // Birden fazla kişinin değerlerini tutmak için tanımlanan değerlerdir.
     struct Human {
         uint ID;
         string name;
@@ -41,6 +46,8 @@ contract Variables {
         uint age;
     }
 
+
+    // enum'ları içerideki sadece bir değişkeni kullanmak için kullanırız. Örneğin bir sayıyı geçtikten sonra 'GREEN' olsun vs.
     enum trafficLights {
         RED,
         YELLOW,
