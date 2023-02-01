@@ -29,7 +29,7 @@ contract Functions {
         return "Bu bir private fonskiyondur";
     }
 
-
+    // public fonksyon oldugu için private fonksiyona erişebiliyor.
     function callPrivateKeyword() public pure returns(string memory) {
         return privateKeyword();
     }

@@ -24,7 +24,7 @@ contract Variables {
 
     // Dynamic-Size Types
 
-    string name;
+    string name = "Oguzhan";
 
     bytes datas;
 
