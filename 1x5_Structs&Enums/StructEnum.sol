@@ -1,8 +1,13 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+
+
 contract StructEnum {
 
+    // Aslında enum'un içine yazılan kelimeler sadece anlamamızı kolaylaştırıyor yoksa şu an sadece 0,1,2,3 değerlerini tutuyor.
+    // Bunun yerine struct'ın içine 'uint256 status' yazsaydıkta aynı anlama gelecekti.
+    // Daha sonra anlayacağımız gibi enum'lar okumamızı daha kolaylaştıracak.
     enum Status {
         Taken, // 0
         Preparing, // 1
@@ -21,19 +26,28 @@ contract StructEnum {
     address public owner;
 
     constructor() {
+        // contract oluşturulduğu anda oluşur.
         owner = msg.sender;
     }
 
+    // Değişkenlerin başına '_' koymak bir alışkanlıktır ve okumayı kolaylastırır.
+    // memory : Memory'ler, fonksiyonun scope'unda yer alıp daha sonra kaybolucak veriler olarak düşünebiliriz. 
     function createOrder(string memory _zipCode, uint256[] memory _products) external returns(uint256) {
         require(_products.length > 0, "No products.");
 
+        // Order oluşturabileceğimiz 3 farklı yazım sekli var. Bunlar :
+
+        // 1.Yazım sekli
+        // Struct kopyası alınıyor. 
         Order memory order;
         order.customer = msg.sender;
         order.zipCode = _zipCode;
         order.products = _products;
+        // Dediğimiz gibi aslında biz Status'un 0'ıncı degerine esitledik fakat yazması ve anlaması boyle daha kolay oldu.
         order.status = Status.Taken;
         orders.push(order);
 
+        // 2.Yazım sekli
         // orders.push(
         //     Order({
         //         customer: msg.sender,
@@ -43,6 +57,7 @@ contract StructEnum {
         //     })
         // );
 
+        // 3.yazım sekli
         // orders.push(Order(msg.sender, _zipCode, _products, Status.Taken));
         
         return orders.length - 1; // 0 1 2 3
