@@ -4,6 +4,14 @@ pragma solidity ^0.8.0;
 
 // Events'ler sayesinde return dönmek yerine bir çıktı üretebiliyoruz.
 // Bunu istersek frontend'te gösterebiliriz.
+// Bunu da 'emit' ile fonksiyonda kullanabiliyoruz.
+// Events, diğer akıllı sözleşmeler tarafından tüketilemez.
+//  Bunun yerine, blok zincirinde günlükler olarak depolanırlar ve blok zincirinden okunan API'ler aracılığıyla alınabilirler.
+// Bu, uygulamanızın (en yaygın olarak frontend uygulamanız), 
+// olayın verilerini içeren günlükleri blok zincirinden "okuyabileceği" anlamına gelir.
+//  Bu şekilde, kullanıcı arayüzünüz blok zincirindeki olaylara yanıt verebilir.
+
+
 
 contract Events {
 
