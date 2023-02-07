@@ -1,6 +1,8 @@
 //SPDX-License-Identifier: MIT
 //@notice it's advanced version of previous parts example
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.0;  
+
+// Modifiers : Eğer bir fonksiyona çalışmasından önce veya sonra daha önce belirlediğimiz özellikleri katmak, kontrolleri yapmak vs. için kullanılır.
 
 contract Modifier {
 
@@ -70,7 +72,7 @@ contract Modifier {
 
     modifier checkProducts(uint256[] memory _products) {
         require(_products.length > 0, "No products.");
-        _;
+        _; // bu işaret yukarda yazan kodu (alttada olabilir ne zaman çalışmasını istediğimnze göre değişir) temsil eder.
     }
 
     modifier checkOrderId(uint256 _orderId) {
