@@ -2,6 +2,9 @@
 //@notice it's advanced version of previous parts example
 pragma solidity ^0.8.0;
 
+// Events'ler sayesinde return dönmek yerine bir çıktı üretebiliyoruz.
+// Bunu istersek frontend'te gösterebiliriz.
+
 contract Events {
 
     enum Status {
@@ -22,6 +25,7 @@ contract Events {
     address public owner;
     uint256 public txCount;
 
+    // indexed : indexed keyword'ü ile işlem yapılınca blockchain'de index değerlerini sorgulayabiliyoruz.
     event OrderCreated(uint256 _orderId, address indexed _consumer);
     event ZipChanged(uint256 _orderId, string _zipCode);
 
