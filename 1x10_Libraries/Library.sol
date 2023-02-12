@@ -1,46 +1,71 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-library Math {
+// Sürekli kullanabileceğimiz fonksiyonları oluşturmamızı sağlar.
 
-    function plus(uint x, uint y) public pure returns(uint) {
+library Math {
+    function plus(uint256 x, uint256 y) public pure returns (uint256) {
         return x + y;
     }
 
-    function minus(uint x, uint y) public pure returns(uint) {
+    function minus(uint256 x, uint256 y) public pure returns (uint256) {
         return x - y;
     }
-    
-    function multi(uint x, uint y) public pure returns(uint) {
+
+    function multi(uint256 x, uint256 y) public pure returns (uint256) {
         return x * y;
     }
 
-    function divide(uint x, uint y) public pure returns(uint) {
-        require(y != 0,"bu sayisi begenmedim!");
+    function divide(uint256 x, uint256 y) public pure returns (uint256) {
+        require(y != 0, "bu sayisi begenmedim!");
         return x / y;
     }
 
-    function min(uint x, uint y) public pure returns(uint) {
-        if( x <= y){
+    function min(uint256 x, uint256 y) public pure returns (uint256) {
+        if (x <= y) {
             return x;
-        }else {
+        } else {
             return y;
         }
     }
 
-    function max(uint x, uint y) public pure returns(uint) {
-        if( x >= y){
+    function max(uint256 x, uint256 y) public pure returns (uint256) {
+        if (x >= y) {
             return x;
-        }else {
+        } else {
             return y;
         }
     }
-
 }
 
+// Yukarıda oluşturduğumuz library en basit şeklinde 'Math(library ismi)' ile başlayıp fonksiyonu ekleyerek çağırabiliyoruz.
+contract Library2 {
+    function trial1(uint256 x, uint256 y) public pure returns (uint256) {
+        return Math.plus(x, y);
+    }
+
+    function trial2(uint256 x, uint256 y) public pure returns (uint256) {
+        return Math.max(x, y);
+    }
+
+    function trial3(uint256 x, uint256 y) public pure returns (uint256) {
+        return Math.min(x, y);
+    }
+
+    function trial4(uint256 x, uint256 y) public pure returns (uint256) {
+        return Math.multi(x, y);
+    }
+}
+
+
+// Verilen array içerisinde belirtilen sayı var mı ? sorsunu cevaplamak için yazılan search fonksiyonu.
 library Search {
-    function indexOf(uint[] memory list, uint data) public pure returns(uint) {
-        for (uint i = 0; i < list.length; i++) {
+    function indexOf(uint256[] memory list, uint256 data)
+        public
+        pure
+        returns (uint256)
+    {
+        for (uint256 i = 0; i < list.length; i++) {
             if (list[i] == data) {
                 return i;
             }
@@ -50,40 +75,41 @@ library Search {
 }
 
 contract Library {
+    using Math for uint256;
+    using Search for uint256[];
 
-    using Math for uint;
-    using Search for uint[];
-
-    function trial1(uint[] memory x, uint y) public pure returns(uint) {
+    function trial1(uint256[] memory x, uint256 y)
+        public
+        pure
+        returns (uint256)
+    {
         return x.indexOf(y); // Search.indexOf(x,y)  Math.plus(x,y);
     }
-    
 }
+
 
 library Human {
     struct Person {
-        uint age;
+        uint256 age;
     }
 
     function birthday(Person storage _person) public {
         _person.age += 1;
     }
 
-    function showAge(Person storage _person) public view returns(uint) {
+    function showAge(Person storage _person) public view returns (uint256) {
         return _person.age;
     }
 }
 
-
-
 contract HumanContract {
-    mapping(uint => Human.Person) people;
+    mapping(uint256 => Human.Person) people;
 
     function newYear() public {
         Human.birthday(people[0]);
     }
 
-    function show() public view returns(uint) {
+    function show() public view returns (uint256) {
         return Human.showAge(people[0]);
     }
 }
