@@ -18,6 +18,13 @@ pragma solidity ^0.8.0;
     * mapping'ler her zaman kontrat üzerinde tanımlanır ve storage'dadır.
 */
 
+// Calldata'yı fonksiyonun içerisinde verilen değerleri doğrudan okumak istiyorsak kullanmalı ;
+// Memory'i fonksiyon içerisinde eğer bir değişiklik yapılmayacaksa sadece okuma işlemi yapılacaksa kullanılmalı ;
+// Storage ise bir değişiklik yapılacaksa kullanılacaktır.
+// Kodun daha fazla okunaklı olması için, daha az gas harcamak için bunlara dikkat edilmesi gerekir. 
+// En çok gaz harcıyandan en az harcayana : Storage > Memory > Calldata
+
+
 struct Student {
     uint8 age;
     uint16 score;
@@ -28,6 +35,7 @@ contract School {
     uint256 totalStudents = 0;              // storage
     mapping(uint256 => Student) students;   // storage
 
+    // memory veya storage değilde 'calldata' olursa, bu değişken değişmez, sonradan atama yapılamaz.
     function addStudent(string calldata name, uint8 age, uint16 score) external {
         uint256 currentId = totalStudents++;
         students[currentId] = Student(age, score, name); 
@@ -39,6 +47,7 @@ contract School {
         uint8 newAge,               // memory
         uint16 newScore             // memory
     ) external {
+        // kontratın içeriğini değiştirmek istiyorsak 'storage' kullanmalıyız.
         Student storage currentStudent = students[id];
 
         currentStudent.name = newName;
